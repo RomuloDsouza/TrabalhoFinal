@@ -1,0 +1,27 @@
+@import url('https://fonts.googleapis.com/css2?family=Exo+2:ital,wght@0,100..900;1,100..900&family=Noto+Sans+Glagolitic&family=Varela+Round&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Exo+2:ital,wght@0,100..900;1,100..900&family=Noto+Sans+Glagolitic&family=Signika:wght@300..700&family=Varela+Round&display=swap');
+
+:root {
+    --background:#fff;
+    --navbar:#00958e;
+    --sidbar: #99c791;
+    --btn-primary: #54bbeb;
+    --btn-secundary: #d1504b;
+}
+
+
+
+
+.navBar{
+    width: 100%;
+    height: 80px;
+    background-color: var(--navbar);
+}
+
+.body-home {
+    display: flex;
+}
+
+.btnPrimary{
+    background-color: var(--white-back);
+}
