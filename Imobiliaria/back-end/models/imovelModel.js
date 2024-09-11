@@ -57,7 +57,7 @@ class ImovelModel {
       imovel.complemento, 
       imovel.tipoImovel, 
       imovel.finalidadeImovel, 
-      imovel.valor, 
+      
       imovel.cidadeNome AS cidadeNome, 
       imovel.estadoNome AS estadoNome,
       imovel.idUsuario AS idUsuario
@@ -70,37 +70,84 @@ class ImovelModel {
 
 
 
-  // // Método para obter uma imovel específica por ID no banco de dados
+  
 
-  // read(id) {
-  //   const sql = `
-  //     SELECT 
-  //       imovel.idimovel, 
-  //       imovel.cepImovel, 
-  //       imovel.logradouro, 
-  //       imovel.bairro, 
-  //       imovel.numero, 
-  //       imovel.complemento, 
-  //       imovel.tipoImovel, 
-  //       imovel.finalidadeImovel, 
-  //       imovel.valor, 
-  //       cidade.nome AS cidadeNome, 
-  //       usuario.email AS usuarioEmail,
-  //       imovel.idCidade,
-  //       imovel.idUsuario
+  readlistimovel() {
+    const sql = `
+      SELECT 
+        imovel.idimovel, 
+        imovel.cepImovel, 
+        imovel.logradouro, 
+        imovel.bairro, 
+        imovel.numero, 
+        imovel.complemento, 
+        imovel.tipoImovel, 
+        imovel.finalidadeImovel, 
+        imovel.cidadeNome, 
+        imovel.estadoNome, 
+        imovel.idUsuario,
+        informacoesimovel.areaTotal,
+        informacoesimovel.areaPrivada,
+        informacoesimovel.quarto,
+        informacoesimovel.banheiro,
+         informacoesimovel.garagem,
+         informacoesimovel.suite,
+         informacoesimovel.valorVenda,
+         informacoesimovel.valorAluguel,
+         informacoesimovel.valorIptu,
+         informacoesimovel.valorCondominio,
+          informacoesimovel.descricaoImovel
 
-  //     FROM 
-  //       imovel
-  //     JOIN 
-  //       cidade ON imovel.idCidade = cidade.idCidade
-  //     JOIN 
-  //       usuario ON imovel.idUsuario = usuario.idusuario
-  //     WHERE 
-  //       imovel.idimovel = ?;
-  //   `;
+      FROM 
+        imovel
+      JOIN 
+        informacoesimovel ON imovel.idimovel = informacoesimovel.idImovel
+     
+    `;
 
-  //   return this.executeSQL(sql, [id]); // Executa a consulta SQL utilizando o método executeSQL e retorna o resultado
-  // }
+    return this.executeSQL(sql); // Executa a consulta SQL utilizando o método executeSQL e retorna o resultado
+}
+
+
+readlistimovelId(id) {
+  const sql = `
+  SELECT 
+    imovel.idimovel, 
+    imovel.cepImovel, 
+    imovel.logradouro, 
+    imovel.bairro, 
+    imovel.numero, 
+    imovel.complemento, 
+    imovel.tipoImovel, 
+    imovel.finalidadeImovel, 
+    imovel.cidadeNome, 
+    imovel.estadoNome, 
+    imovel.idUsuario,
+    informacoesimovel.areaTotal,
+    informacoesimovel.areaPrivada,
+    informacoesimovel.quarto,
+    informacoesimovel.banheiro,
+    informacoesimovel.garagem,
+    informacoesimovel.suite,
+    informacoesimovel.valorVenda,
+    informacoesimovel.valorAluguel,
+    informacoesimovel.valorIptu,
+    informacoesimovel.valorCondominio,
+    informacoesimovel.descricaoImovel
+  FROM 
+    imovel
+  JOIN 
+    informacoesimovel ON imovel.idimovel = informacoesimovel.idImovel
+  WHERE 
+    imovel.idimovel = ?;
+`;
+
+return this.executeSQL(sql, [id]); // Executa a consulta SQL utilizando o método executeSQL e retorna o resultado
+}
+
+
+
+
 
 
   read(id) {
@@ -114,7 +161,6 @@ class ImovelModel {
         imovel.complemento, 
         imovel.tipoImovel, 
         imovel.finalidadeImovel, 
-        imovel.valor, 
         imovel.cidadeNome, 
         imovel.estadoNome, 
         imovel.idUsuario

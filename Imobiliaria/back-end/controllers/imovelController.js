@@ -1,6 +1,7 @@
 // Importa o modelo de imovel para fazer as operações CRUD relacionadas as imovels
 const imovelModel = require("../models/imovelModel");
 const imovelInformacao=require("../models/informacoesImovelModel")
+const imagem=require("../models/imagemModel")
 
 // Define a classe imovelController, responsável por controlar as operações relacionadas as imovels
 class ImovelController {
@@ -15,6 +16,30 @@ class ImovelController {
       )
       .catch((error) => res.status(400).json(error.message));
   }
+
+  readlistimovel(req, res) {
+    // Chama a função readList() do modelo imovelModel para obter a lista de imovels
+    const retorno = imovelModel.readlistimovel();
+    return retorno
+      .then((result) => result.length == 0
+        ? res.status(404).send("Nenhuma imovel foi encontrada!")
+        : res.status(200).json(result)
+      )
+      .catch((error) => res.status(400).json(error.message));
+  }
+
+  readlistimovelId(req, res) {
+    const { id } = req.params;
+    // Chama a função read() do modelo imovelModel para obter a imovel por ID fornecido
+    const retorno = imovelModel.readlistimovelId(id);
+    return retorno
+      .then((result) => result.length == 0
+        ? res.status(404).send("Nenhuma imovel foi encontrada!")
+        : res.status(200).json(result)
+      )
+      .catch((error) => res.status(400).json(error.message));
+  }
+
 
   // Método para ler uma imovel específica por ID
   read(req, res) {
@@ -38,6 +63,18 @@ class ImovelController {
     console.log(reqBody);
     // Chama a função create() do modelo imovelModel para criar uma nova imovel
 
+    // try{
+    //   const retorno = await imovelModel.create(reqBody[0]);
+    //   const idimovel = retorno.insertId;
+    //   reqBody[1].idimovel = idimovel;
+    //   const retorno3 = await imovelInformacao.create(reqBody[1]);
+    //   reqBody[2].idimovel = idimovel;
+    //   const retorno2 = await imagem.create(reqBody[2]);
+    //   return res.status(201).json(retorno);
+    // }catch (error) {
+    //   res.status(400).json({ error: error.message });
+    // }
+
     try{
       const retorno = await imovelModel.create(reqBody[0]);
       const idimovel = retorno.insertId;
@@ -47,6 +84,9 @@ class ImovelController {
     }catch (error) {
       res.status(400).json({ error: error.message });
     }
+
+
+
 
   }
 

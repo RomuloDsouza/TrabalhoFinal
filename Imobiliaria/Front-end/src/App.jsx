@@ -47,7 +47,7 @@ import { AuthProvider } from './components/login/authContext';
 import Navbar from './components/user/navbar';
 import CadastroImovel from '../src/components/user/CadastroImovel';
 import PesquisaImoveis from '../src/components/user/PesquisaImoveis';
-
+import ImovelDetalhes from '../src/components/user/ImovelDetalhes';
 
 
 import Home from './components/user/Home';
@@ -57,7 +57,7 @@ function App() {
   return (
     <AuthProvider>
       <BrowserRouter>
-        <div>
+        
           <Navbar />
           <Routes>
            
@@ -65,11 +65,12 @@ function App() {
               <Route path='/' element={<Home />} />
               <Route path='/cadastroImovel' element={<CadastroImovel/>} />
               <Route path='/busca-de-imoveis' element={<PesquisaImoveis/>} />
-              <Route path='/home' element={<Home />} />
+              <Route path="/imovel/:id" element={<ImovelDetalhes />} /> 
+
               
               
           </Routes>
-        </div>
+        
       </BrowserRouter>
     </AuthProvider>
   );

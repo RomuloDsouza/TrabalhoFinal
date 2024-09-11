@@ -1,0 +1,54 @@
+CREATE DATABASE imobiliaria;
+USE imobiliaria;
+
+-- Tabela de usuários
+CREATE TABLE usuario (
+    idusuario INT AUTO_INCREMENT PRIMARY KEY,
+    nomeUsuario VARCHAR(255) NOT NULL,
+    email VARCHAR(255) NOT NULL,
+    senha VARCHAR(255) NOT NULL
+);
+
+-- Tabela de imóveis
+CREATE TABLE imovel (
+    idimovel INT AUTO_INCREMENT PRIMARY KEY,
+    cepImovel VARCHAR(20) NOT NULL,
+    logradouro VARCHAR(255) NOT NULL,
+    bairro VARCHAR(255) NOT NULL,
+    numero VARCHAR(10),
+    complemento VARCHAR(255),
+    cidadeNome VARCHAR(255),
+    estadoNome VARCHAR(255),
+    tipoImovel ENUM('A', 'C', 'T') NOT NULL, -- A: Apartamento, C: Casa, T: Terreno
+    finalidadeImovel ENUM('A', 'V') NOT NULL, -- A: Aluguel, V: Venda
+    idUsuario INT NOT NULL,
+    FOREIGN KEY (idUsuario) REFERENCES usuario(idusuario)
+);
+
+-- Tabela de imagens
+CREATE TABLE imagem (
+    idImagem INT AUTO_INCREMENT PRIMARY KEY,
+    idImovel INT,
+    caminho_imagem VARCHAR(255),
+    statusImagem VARCHAR(50),
+    FOREIGN KEY (idImovel) REFERENCES imovel(idimovel)
+);
+
+-- Tabela de informações do imóvel
+CREATE TABLE InformacoesImovel (
+    idInfoImovel INT AUTO_INCREMENT PRIMARY KEY,
+    areaTotal DECIMAL(10, 2),
+    areaPrivada DECIMAL(10, 2),
+    quarto INT,
+    banheiro INT,
+    garagem INT,
+    suite INT,
+    valorVenda DECIMAL(10, 2),
+    valorAluguel DECIMAL(10, 2),
+    valorIptu DECIMAL(10, 2),
+    valorCondominio DECIMAL(10, 2),
+    descricaoImovel TEXT,
+    idImovel INT,
+    FOREIGN KEY (idImovel) REFERENCES imovel(idimovel)
+);
+

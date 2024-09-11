@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+
+import React, { useState, useEffect } from "react";
 import {
   Container,
   TextField,
@@ -9,77 +10,53 @@ import {
   CardMedia,
   CardContent,
   Typography,
-  Slider
-} from '@mui/material';
-
-const imoveis = [
-  // Exemplo de imóveis para testes
-  {
-    id: 1,
-    codigo: 'LH4015',
-    tipo: 'Apartamento',
-    quartos: 3,
-    cidade: 'São Paulo',
-    estado: 'SP',
-    bairro: 'Centro',
-    preco: 240000,
-    imagem: '/imagens/imovel1.jpg',
-    finalidade: 'Venda',
-  },
-  {
-    id: 2,
-    codigo: 'LH4011',
-    tipo: 'Apartamento',
-    quartos: 2,
-    cidade: 'Rio de Janeiro',
-    estado: 'RJ',
-    bairro: 'Copacabana',
-    preco: 340000,
-    imagem: '/imagens/imovel2.jpg',
-    finalidade: 'Aluguel',
-  },
-  {
-    id: 3,
-    codigo: 'LH4007',
-    tipo: 'Casa',
-    quartos: 4,
-    cidade: 'Salvador',
-    estado: 'BA',
-    bairro: 'Ondina',
-    preco: 540000,
-    imagem: '/imagens/imovel3.jpg',
-    finalidade: 'Venda',
-  },
-];
+  Slider,
+} from "@mui/material";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 const PesquisaImoveis = () => {
-  const [tipo, setTipo] = useState('');
-  const [quartos, setQuartos] = useState('');
-  const [cidade, setCidade] = useState('');
-  const [estado, setEstado] = useState('');
-  const [bairro, setBairro] = useState('');
-  const [finalidade, setFinalidade] = useState('');
-  const [preco, setPreco] = useState([100000, 1000000]);
+  const [imoveis, setImoveis] = useState([]);
+  const [tipo, setTipo] = useState("");
+  const [quartos, setQuartos] = useState("");
+  const [cidade, setCidade] = useState("");
+  const [estado, setEstado] = useState("");
+  const [bairro, setBairro] = useState("");
+  const [finalidade, setFinalidade] = useState("");
+  const [preco, setPreco] = useState([1, 1000000]);
+  const navigate = useNavigate();
 
-  const handleTipoChange = (event) => setTipo(event.target.value);
-  const handleQuartosChange = (event) => setQuartos(event.target.value);
-  const handleCidadeChange = (event) => setCidade(event.target.value);
-  const handleEstadoChange = (event) => setEstado(event.target.value);
-  const handleBairroChange = (event) => setBairro(event.target.value);
-  const handleFinalidadeChange = (event) => setFinalidade(event.target.value);
-  const handlePrecoChange = (event, newValue) => setPreco(newValue);
+  useEffect(() => {
+    const fetchImoveis = async () => {
+      try {
+        const response = await axios.get(
+          "http://localhost:3000/readlistimovel"
+        );
+        const imoveisData = response.data;
+        setImoveis(imoveisData);
+        console.log(imoveisData);
+      } catch (error) {
+        console.error(error);
+        setImoveis([]);
+        console.log("Erro ao carregar imóveis");
+      }
+    };
+
+    fetchImoveis();
+  }, []);
 
   const filtrarImoveis = () => {
     return imoveis.filter(
       (imovel) =>
-        (tipo ? imovel.tipo === tipo : true) &&
-        (quartos ? imovel.quartos === parseInt(quartos) : true) &&
-        (cidade ? imovel.cidade === cidade : true) &&
-        (estado ? imovel.estado === estado : true) &&
+        (tipo ? imovel.tipoImovel === tipo : true) &&
+        (quartos ? imovel.quarto === parseInt(quartos) : true) &&
+        (cidade ? imovel.cidadeNome === cidade : true) &&
+        (estado ? imovel.estadoNome === estado : true) &&
         (bairro ? imovel.bairro === bairro : true) &&
-        (finalidade ? imovel.finalidade === finalidade : true) &&
-        imovel.preco >= preco[0] &&
-        imovel.preco <= preco[1]
+        (finalidade ? imovel.finalidadeImovel === finalidade : true) &&
+        (finalidade === "A"
+          ? imovel.valorAluguel >= preco[0] && imovel.valorAluguel <= preco[1]
+          : imovel.valorVenda >= preco[0] && imovel.valorVenda <= preco[1])
     );
   };
 
@@ -92,12 +69,12 @@ const PesquisaImoveis = () => {
             select
             label="Tipo"
             value={tipo}
-            onChange={handleTipoChange}
+            onChange={(event) => setTipo(event.target.value)}
           >
             <MenuItem value="">Todos</MenuItem>
-            <MenuItem value="Apartamento">Apartamento</MenuItem>
-            <MenuItem value="Casa">Casa</MenuItem>
-            <MenuItem value="Terreno">Terreno</MenuItem>
+            <MenuItem value="A">Apartamento</MenuItem>
+            <MenuItem value="C">Casa</MenuItem>
+            <MenuItem value="T">Terreno</MenuItem>
           </TextField>
         </Grid>
         <Grid item xs={12} sm={3}>
@@ -106,7 +83,7 @@ const PesquisaImoveis = () => {
             select
             label="Quartos"
             value={quartos}
-            onChange={handleQuartosChange}
+            onChange={(event) => setQuartos(event.target.value)}
           >
             <MenuItem value="">Todos</MenuItem>
             <MenuItem value="1">1</MenuItem>
@@ -121,12 +98,13 @@ const PesquisaImoveis = () => {
             select
             label="Cidade"
             value={cidade}
-            onChange={handleCidadeChange}
+            onChange={(event) => setCidade(event.target.value)}
           >
             <MenuItem value="">Todas</MenuItem>
             <MenuItem value="São Paulo">São Paulo</MenuItem>
             <MenuItem value="Rio de Janeiro">Rio de Janeiro</MenuItem>
             <MenuItem value="Salvador">Salvador</MenuItem>
+            <MenuItem value="Leopoldina">Leopoldina</MenuItem>
           </TextField>
         </Grid>
         <Grid item xs={12} sm={3}>
@@ -135,12 +113,13 @@ const PesquisaImoveis = () => {
             select
             label="Estado"
             value={estado}
-            onChange={handleEstadoChange}
+            onChange={(event) => setEstado(event.target.value)}
           >
             <MenuItem value="">Todos</MenuItem>
+            <MenuItem value="MG">MG</MenuItem>
             <MenuItem value="SP">SP</MenuItem>
             <MenuItem value="RJ">RJ</MenuItem>
-            <MenuItem value="BA">BA</MenuItem>
+            <MenuItem value="ES">ES</MenuItem>
           </TextField>
         </Grid>
         <Grid item xs={12} sm={3}>
@@ -149,7 +128,7 @@ const PesquisaImoveis = () => {
             select
             label="Bairro"
             value={bairro}
-            onChange={handleBairroChange}
+            onChange={(event) => setBairro(event.target.value)}
           >
             <MenuItem value="">Todos</MenuItem>
             <MenuItem value="Centro">Centro</MenuItem>
@@ -162,29 +141,34 @@ const PesquisaImoveis = () => {
             fullWidth
             select
             label="Finalidade"
-            value={finalidade}
-            onChange={handleFinalidadeChange}
+            value={finalidade || ""}
+            onChange={(event) => setFinalidade(event.target.value)}
           >
             <MenuItem value="">Todas</MenuItem>
-            <MenuItem value="Venda">Venda</MenuItem>
-            <MenuItem value="Aluguel">Aluguel</MenuItem>
+            <MenuItem value="V">Venda</MenuItem>
+            <MenuItem value="A">Aluguel</MenuItem>
           </TextField>
         </Grid>
         <Grid item xs={12} sm={6}>
           <Typography id="range-slider" gutterBottom>
-            Preço de Venda
+            Preço
           </Typography>
           <Slider
             value={preco}
-            onChange={handlePrecoChange}
+            onChange={(event, newValue) => setPreco(newValue)}
             valueLabelDisplay="auto"
-            min={100000}
+            min={1}
             max={1000000}
             step={10000}
           />
         </Grid>
         <Grid item xs={12}>
-          <Button variant="contained" color="primary" fullWidth>
+          <Button
+            variant="contained"
+            color="primary"
+            fullWidth
+            onClick={() => setImoveis(filtrarImoveis())}
+          >
             Pesquisar
           </Button>
         </Grid>
@@ -192,29 +176,44 @@ const PesquisaImoveis = () => {
 
       <Grid container spacing={2} sx={{ marginTop: 2 }}>
         {filtrarImoveis().map((imovel) => (
-          <Grid item xs={12} sm={4} key={imovel.id}>
-            <Card>
+          <Grid item xs={12} sm={4} key={imovel.idimovel}>
+            <Card
+              onClick={() => navigate(`/imovel/${imovel.idimovel}`)}
+              sx={{ cursor: "pointer" }}
+            >
               <CardMedia
                 component="img"
-                alt={`Imagem do imóvel ${imovel.codigo}`}
+                alt={`Imagem do imóvel ${imovel.idimovel}`}
                 height="140"
-                image={imovel.imagem}
+                image={
+                  imovel.imagem ||
+                  "https://images.unsplash.com/photo-1452626212852-811d58933cae?q=80&w=1364&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+                }
               />
               <CardContent>
                 <Typography gutterBottom variant="h5" component="div">
-                  Cód: {imovel.codigo}
+                  Cód: {imovel.idimovel}
                 </Typography>
                 <Typography variant="body2" color="text.secondary">
-                  {imovel.tipo} - {imovel.quartos} quartos
+                  {imovel.tipoImovel === "A"
+                    ? "Apartamento"
+                    : imovel.tipoImovel === "C"
+                    ? "Casa"
+                    : "Terreno"}{" "}
+                  - {imovel.quarto} quartos
                 </Typography>
                 <Typography variant="body2" color="text.secondary">
-                  {imovel.cidade} - {imovel.estado} - {imovel.bairro}
+                  {imovel.cidadeNome} - {imovel.estadoNome} - {imovel.bairro}
                 </Typography>
                 <Typography variant="body2" color="text.secondary">
-                  Finalidade: {imovel.finalidade}
+                  Finalidade:{" "}
+                  {imovel.finalidadeImovel === "V" ? "Venda" : "Aluguel"}
                 </Typography>
                 <Typography variant="body2" color="text.secondary">
-                  Preço: R$ {imovel.preco.toLocaleString('pt-BR')}
+                  Preço:{" "}
+                  {imovel.finalidadeImovel === "A"
+                    ? `R$ ${imovel.valorAluguel.toLocaleString("pt-BR")}/mês`
+                    : `R$ ${imovel.valorVenda.toLocaleString("pt-BR")}`}
                 </Typography>
               </CardContent>
             </Card>
@@ -226,3 +225,5 @@ const PesquisaImoveis = () => {
 };
 
 export default PesquisaImoveis;
+
+

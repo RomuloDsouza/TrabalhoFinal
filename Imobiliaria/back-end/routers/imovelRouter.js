@@ -24,6 +24,11 @@ router.get("/imovel", imovelController.readList);
 // onde ":id" é um parâmetro na URL que representa o ID da imovel
 router.get("/imovel/:id", imovelController.read);
 
+router.get("/readlistimovel", imovelController.readlistimovel);
+
+router.get("/readlistimovel/:id", imovelController.readlistimovelId);
+
+
 // Define uma rota POST para criar uma nova imovel
 // Quando uma solicitação POST é feita para "/imovel", o método create() do controlador de imovel é chamado
 router.post("/imovel",upload.none(), imovelController.create);
