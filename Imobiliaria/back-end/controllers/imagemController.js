@@ -86,22 +86,22 @@ const path = require('path');
 const fs = require('fs');
 
 // Define o armazenamento do Multer
-const storage = multer.diskStorage({
-  destination: function (req, file, cb) {
-    cb(null, 'uploads/');
-  },
-  filename: function (req, file, cb) {
-    const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1E9);
-    cb(null, file.fieldname + '-' + uniqueSuffix + path.extname(file.originalname));
-  }
-});
+// const storage = multer.diskStorage({
+//   destination: function (req, file, cb) {
+//     cb(null, 'uploads/');
+//   },
+//   filename: function (req, file, cb) {
+//     const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1E9);
+//     cb(null, file.fieldname + '-' + uniqueSuffix + path.extname(file.originalname));
+//   }
+// });
 
-const upload = multer({ storage: storage });
+// const upload = multer({ storage: storage });
 
-// Cria o diretório 'uploads' se não existir
-if (!fs.existsSync('./uploads')) {
-  fs.mkdirSync('./uploads');
-}
+// // Cria o diretório 'uploads' se não existir
+// if (!fs.existsSync('./uploads')) {
+//   fs.mkdirSync('./uploads');
+// }
 
 // Define a classe imagemController
 class ImagemController {
@@ -160,17 +160,17 @@ class ImagemController {
       .catch((error) => res.status(400).json(error.message));
   }
 
-  // Método para fazer o upload de uma imagem
-  uploadImage(req, res) {
-    const uploadSingle = upload.single('file');
-    uploadSingle(req, res, (err) => {
-      if (err) {
-        return res.status(400).json(err.message);
-      }
-      // Aqui você pode adicionar lógica para salvar informações sobre o arquivo no banco de dados, se necessário
-      res.send({ message: 'Upload realizado com sucesso!', file: req.file });
-    });
-  }
+  // // Método para fazer o upload de uma imagem
+  // uploadImage(req, res) {
+  //   const uploadSingle = upload.single('file');
+  //   uploadSingle(req, res, (err) => {
+  //     if (err) {
+  //       return res.status(400).json(err.message);
+  //     }
+  //     // Aqui você pode adicionar lógica para salvar informações sobre o arquivo no banco de dados, se necessário
+  //     res.send({ message: 'Upload realizado com sucesso!', file: req.file });
+  //   });
+  // }
 }
 
 // Exporta uma instância da classe imagemController

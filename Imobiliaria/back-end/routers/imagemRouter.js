@@ -57,6 +57,6 @@ router.put('/imagem/:id', imagemController.update.bind(imagemController));
 router.delete('/imagem/:id', imagemController.delete.bind(imagemController));
 
 // Rota para upload de imagem
-router.post('/upload', imagemController.uploadImage.bind(imagemController));
+// router.post('/upload', imagemController.uploadImage.bind(imagemController));
 
 module.exports = router;

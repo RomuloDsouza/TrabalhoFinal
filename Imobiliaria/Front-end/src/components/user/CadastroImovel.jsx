@@ -23,7 +23,7 @@
 //     cepImovel: "",
 //     bairro: "",
 //     cidadeNome: "",
-//    estado: "",
+//    estadoNome: "",
 //     logradouro: "",
 //     numero: "",
 //     complemento: "",
@@ -79,7 +79,7 @@
 //             cepImovel: cep,
 //             bairro: data.bairro,
 //             cidadeNome: data.localidade,
-//            estado: data.uf,
+//            estadoNome: data.uf,
 //             logradouro: data.logradouro,
 //           });
 //         } else {
@@ -134,7 +134,7 @@
 //         cepImovel: "",
 //         bairro: "",
 //         cidadeNome: "",
-//        estado: "",
+//        estadoNome: "",
 //         logradouro: "",
 //         numero: "",
 //         complemento: "",
@@ -234,10 +234,10 @@
 //             </Grid>
 //             <Grid item xs={12} sm={6}>
 //               <TextField
-//                 name="estado"
-//                 label="Estado"
+//                 name="estadoNome"
+//                 label="estadoNome"
 //                 fullWidth
-//                 value={imovel.estado}
+//                 value={imovel.estadoNome}
 //                 onChange={handleChange}
 //                 disabled
 //               />
@@ -459,7 +459,7 @@ function CadastroImovel() {
     cepImovel: "",
     bairro: "",
     cidadeNome: "",
-    estado: "",
+    estadoNome: "",
     logradouro: "",
     numero: "",
     complemento: "",
@@ -515,7 +515,7 @@ function CadastroImovel() {
             cepImovel: cep,
             bairro: data.bairro,
             cidadeNome: data.localidade,
-            estado: data.uf,
+            estadoNome: data.uf,
             logradouro: data.logradouro,
           });
         } else {
@@ -552,18 +552,18 @@ function CadastroImovel() {
       formData.append(`foto${index + 1}`, foto);
     });
 
-    const formData2 = new FormData();
-    formData.append('file', fotos);
-    try {
-      const res = await axios.post('http://localhost:3000/upload', formData2, {
-        headers: {
-          'Content-Type': 'multipart/form-data',
-        },
-      });
-      console.log(res.data.message);
-    } catch (err) {
-      console.log('Erro no upload!');
-    }
+    // const formData2 = new FormData();
+    // formData.append('file', fotos);
+    // try {
+    //   const res = await axios.post('http://localhost:3000/upload', formData2, {
+    //     headers: {
+    //       'Content-Type': 'multipart/form-data',
+    //     },
+    //   });
+    //   console.log(res.data.message);
+    // } catch (err) {
+    //   console.log('Erro no upload!');
+    // }
 
 
     let objeto = [imovel, imovelInformacao,fotos];
@@ -587,7 +587,7 @@ function CadastroImovel() {
         cepImovel: "",
         bairro: "",
         cidadeNome: "",
-        estado: "",
+        estadoNome: "",
         logradouro: "",
         numero: "",
         complemento: "",
@@ -689,10 +689,10 @@ function CadastroImovel() {
             </Grid>
             <Grid item xs={12} sm={6}>
               <TextField
-                name="estado"
-                label="Estado"
+                name="estadoNome"
+                label="estadoNome"
                 fullWidth
-                value={imovel.estado}
+                value={imovel.estadoNome}
                 onChange={handleChange}
                 disabled
               />
