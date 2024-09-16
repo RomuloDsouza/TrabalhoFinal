@@ -48,6 +48,9 @@ import Navbar from './components/user/navbar';
 import CadastroImovel from '../src/components/user/CadastroImovel';
 import PesquisaImoveis from '../src/components/user/PesquisaImoveis';
 import ImovelDetalhes from '../src/components/user/ImovelDetalhes';
+ import Login from './components/login/login';
+ import BuscarImovel from './components/user/BuscarImovel';
+ import EditarImovel from './components/user/Editarimovel';
 
 
 import Home from './components/user/Home';
@@ -61,13 +64,13 @@ function App() {
           <Navbar />
           <Routes>
            
-           
+              <Route exact path='/login' element={<Login />} />
               <Route path='/' element={<Home />} />
               <Route path='/cadastroImovel' element={<CadastroImovel/>} />
               <Route path='/busca-de-imoveis' element={<PesquisaImoveis/>} />
               <Route path="/imovel/:id" element={<ImovelDetalhes />} /> 
-
-              
+              <Route path="/buscarImovel" element={< BuscarImovel/>} /> 
+              <Route path="/editarimovel/:id" element={< EditarImovel/>} /> 
               
           </Routes>
         

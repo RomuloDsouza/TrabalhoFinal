@@ -41,6 +41,11 @@ class UsuarioModel {
     return this.executeSQL(sql, newusuario); // Executa a consulta SQL utilizando o método executeSQL e retorna o resultado
   }
 
+  findByEmail(email) {
+    const sql = "SELECT idusuario, nomeUsuario, email, senha FROM  usuario  WHERE email = ?";
+    return this.executeSQL(sql, email);
+  }
+
   // Método para atualizar uma usuario existente por ID no banco de dados
   update(updatedusuario, id) {
     const sql = "UPDATE usuario SET ? WHERE Idusuario= ?"; // Consulta SQL para atualizar uma usuario por ID

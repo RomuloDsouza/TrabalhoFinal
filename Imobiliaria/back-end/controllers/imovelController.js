@@ -61,19 +61,7 @@ class ImovelController {
     // Obtém os dados da nova imovel do corpo da requisição
     const reqBody = req.body; 
     console.log(reqBody);
-    // Chama a função create() do modelo imovelModel para criar uma nova imovel
-
-    // try{
-    //   const retorno = await imovelModel.create(reqBody[0]);
-    //   const idimovel = retorno.insertId;
-    //   reqBody[1].idimovel = idimovel;
-    //   const retorno3 = await imovelInformacao.create(reqBody[1]);
-    //   reqBody[2].idimovel = idimovel;
-    //   const retorno2 = await imagem.create(reqBody[2]);
-    //   return res.status(201).json(retorno);
-    // }catch (error) {
-    //   res.status(400).json({ error: error.message });
-    // }
+    
 
     try{
       const retorno = await imovelModel.create(reqBody[0]);
@@ -91,19 +79,19 @@ class ImovelController {
   }
 
   // Método para atualizar uma imovel existente por ID
-  update(req, res) {
+ async update (req, res)  {
     // Obtém o parâmetro ID da requisição
+    const reqBody = req.body; 
+
     const { id } = req.params;
-    // Obtém os dados atualizados da imovel do corpo da requisição
-    const reqBody = req.body;
-      
-    // Chama a função update() do modelo imovelModel para atualizar a imovel com o ID fornecido
-    const retorno = imovelModel.update(reqBody, id);
-    return retorno
-      .then((result) =>
-        res.status(200).send("imovel atualizada com sucesso!")
-      )
-      .catch((error) => res.status(400).json(error.message));
+    try{
+      const retorno = await imovelModel.update(reqBody.objeto[0],id);
+    
+      const retorno2 = await imovelInformacao.update(reqBody.objeto[1],id);
+      return res.status(201).json(retorno);
+    }catch (error) {
+      res.status(400).json({ error: error.message });
+    }
 
   }
 

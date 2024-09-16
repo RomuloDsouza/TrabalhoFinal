@@ -184,7 +184,7 @@ return this.executeSQL(sql, [id]); // Executa a consulta SQL utilizando o métod
 
   // Método para atualizar uma imovel existente por ID no banco de dados
   update(updatedimovel, id) {
-    const sql = "UPDATE imovel SET ? WHERE Idimovel= ?"; // Consulta SQL para atualizar uma imovel por ID
+    const sql = "UPDATE imovel SET ? WHERE idimovel= ?"; // Consulta SQL para atualizar uma imovel por ID
     return this.executeSQL(sql, [updatedimovel, id]); // Executa a consulta SQL utilizando o método executeSQL e retorna o resultado
   }
 

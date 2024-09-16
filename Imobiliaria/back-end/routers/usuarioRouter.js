@@ -26,6 +26,8 @@ router.get("/usuario/:id", usuarioController.read);
 // Quando uma solicitação POST é feita para "/usuario", o método create() do controlador de usuario é chamado
 router.post("/usuario", usuarioController.create);
 
+router.post("/login", usuarioController.login);    
+
 // Define uma rota PUT para atualizar uma usuario existente por ID
 // Quando uma solicitação PUT é feita para "/usuario/:id", o método update() do controlador de usuario é chamado,
 // onde ":id" é um parâmetro na URL que representa o ID da usuario

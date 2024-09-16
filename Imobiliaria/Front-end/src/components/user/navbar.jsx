@@ -69,7 +69,7 @@ const userName = getUserNameFromLocalStorage(); // Obtém o nome do usuário
 
               }}
             >
-              Logo
+              Sua logo aqui
             </Link>
           </Typography>
           <Box sx={{ display: 'flex', alignItems: 'center', marginRight: '40px' }}>
@@ -92,11 +92,11 @@ const userName = getUserNameFromLocalStorage(); // Obtém o nome do usuário
 
         {/* Seção de Saudação e Logout */}
         {user && (
-          <Box sx={{ display: 'flex', alignItems: 'center', width: '100%', justifyContent: 'flex-end', padding: '10px 40px', backgroundColor: '#555' }}>
+          <Box sx={{ display: 'flex', alignItems: 'center', width: '100%', justifyContent: 'flex-end', padding: '10px 40px', backgroundColor: '#008080' }}>
             <Typography variant="body1" sx={{ color: '#fff', mr: 3 }}>
               Olá, {userName}.
             </Typography>
-            <IconButton component={Link} to="/manager" sx={{ color: '#fffc' }}>
+            <IconButton component={Link} to="buscarImovel" sx={{ color: '#fffc' }}>
               <HandymanIcon fontSize="large" />
             </IconButton>
             <Button variant="contained" color='success' onClick={logout} sx={{ ml: 2 }}>

@@ -41,7 +41,7 @@ class InformacoesImovelModel {
 
   // Método para atualizar uma InformacoesImovel existente por ID no banco de dados
   update(updatedInformacoesImovel, id) {
-    const sql = "UPDATE InformacoesImovel SET ? WHERE IdInfoImovel = ?"; // Consulta SQL para atualizar uma InformacoesImovel por ID
+    const sql = "UPDATE InformacoesImovel SET ? WHERE idimovel = ?"; // Consulta SQL para atualizar uma InformacoesImovel por ID
     return this.executeSQL(sql, [updatedInformacoesImovel, id]); // Executa a consulta SQL utilizando o método executeSQL e retorna o resultado
   }
 
