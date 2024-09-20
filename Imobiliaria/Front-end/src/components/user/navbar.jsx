@@ -1,11 +1,12 @@
+
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { useAuth } from '../login/authContext';
-import { Box, Typography, IconButton, CssBaseline } from '@mui/material';
+import { Box, Typography, IconButton, CssBaseline, Button } from '@mui/material';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
-import HandymanIcon from '@mui/icons-material/Handyman';
-import { Button } from '@mui/material';
+import EditIcon from '@mui/icons-material/Edit'; // Ícone de lápis
 import '../user/styles/index.css';
+
 const theme = createTheme();
 
 export default function Navbar() {
@@ -21,14 +22,13 @@ export default function Navbar() {
     return '';
   };
 
-
-
-const userName = getUserNameFromLocalStorage(); // Obtém o nome do usuário
+  const userName = getUserNameFromLocalStorage(); // Obtém o nome do usuário
 
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
-      <Box className='navbar'
+      <Box
+        className="navbar"
         sx={{
           display: 'flex',
           flexDirection: 'column',
@@ -41,14 +41,31 @@ const userName = getUserNameFromLocalStorage(); // Obtém o nome do usuário
         }}
       >
         {/* Seção de Contato */}
-        <Box sx={{ display: 'flex', justifyContent: 'end', width: '100%', padding: '10px 20px', backgroundColor: 'var(--navbar)' }}>
+        <Box
+          sx={{
+            display: 'flex',
+            justifyContent: 'end',
+            width: '100%',
+            padding: '10px 20px',
+            backgroundColor: 'var(--navbar)',
+          }}
+        >
           <Typography variant="body2" sx={{ color: '#fff' }}>
-             (32) 0000-0000 | (32) 0000-0000 
+            (32) 0000-0000 | (32) 0000-0000
           </Typography>
         </Box>
 
         {/* Seção do Logo e Links */}
-        <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', width: '100%', height: '80px', backgroundColor: 'var(--navbar)' }}>
+        <Box
+          sx={{
+            display: 'flex',
+            justifyContent: 'space-between',
+            alignItems: 'center',
+            width: '100%',
+            height: '80px',
+            backgroundColor: 'var(--navbar)',
+          }}
+        >
           <Typography
             variant="h4"
             component="h1"
@@ -65,8 +82,7 @@ const userName = getUserNameFromLocalStorage(); // Obtém o nome do usuário
               style={{
                 color: '#FFF',
                 textDecoration: 'none',
-               cursor: 'pointer',
-
+                cursor: 'pointer',
               }}
             >
               Sua logo aqui
@@ -85,21 +101,29 @@ const userName = getUserNameFromLocalStorage(); // Obtém o nome do usuário
             <Link to="/contato" style={{ color: '#FFF', textDecoration: 'none', marginRight: '20px' }}>
               Contato
             </Link>
-            
-            
+            <Link to="/login" style={{ color: '#FFF', textDecoration: 'none', marginRight: '20px' }}>
+              Login
+            </Link>
           </Box>
         </Box>
 
         {/* Seção de Saudação e Logout */}
         {user && (
-          <Box sx={{ display: 'flex', alignItems: 'center', width: '100%', justifyContent: 'flex-end', padding: '10px 40px', backgroundColor: '#008080' }}>
-            <Typography variant="body1" sx={{ color: '#fff', mr: 3 }}>
-              Olá, {userName}.
-            </Typography>
+          <Box
+            sx={{
+              display: 'flex',
+              alignItems: 'center',
+              width: '100%',
+              justifyContent: 'flex-end',
+              padding: '10px 40px',
+              backgroundColor: '#008080',
+            }}
+          >
+                
             <IconButton component={Link} to="buscarImovel" sx={{ color: '#fffc' }}>
-              <HandymanIcon fontSize="large" />
+               Editar imovel  <EditIcon fontSize="large" /> 
             </IconButton>
-            <Button variant="contained" color='success' onClick={logout} sx={{ ml: 2 }}>
+            <Button variant="contained" color="success" onClick={logout} sx={{ ml: 2 }}>
               Sair
             </Button>
           </Box>

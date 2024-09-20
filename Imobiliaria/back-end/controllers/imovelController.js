@@ -95,6 +95,23 @@ class ImovelController {
 
   }
 
+  async hide(req, res) {
+    const { id } = req.params;
+  
+    try {
+      // Atualiza o status do imóvel para inativo
+      await imovelModel.update({ ativo: false }, id);
+  
+      return res.status(200).json({ message: "Imóvel escondido com sucesso." });
+    } catch (error) {
+      return res.status(400).json({ error: error.message });
+    }
+  }
+  
+
+
+
+
   // Método para excluir uma imovel existente por ID
   delete(req, res) {
     // Obtém o parâmetro ID da requisição
@@ -112,3 +129,8 @@ class ImovelController {
 
 // Exporta uma instância da classe imovelController para ser utilizada em outros arquivos do projeto
 module.exports = new ImovelController();
+
+
+
+
+

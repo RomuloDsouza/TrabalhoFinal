@@ -20,30 +20,7 @@ class ImovelModel {
     });
   }
 
-  // Método para obter a lista de todas as imovels no banco de dados
-
-  // readList() {
-  //   const sql = `
-  //   SELECT 
-  //     imovel.idimovel, 
-  //       imovel.cepImovel, 
-  //       imovel.logradouro, 
-  //       imovel.bairro, 
-  //       imovel.numero, 
-  //       imovel.complemento, 
-  //       imovel.tipoImovel, 
-  //       imovel.finalidadeImovel, 
-  //       imovel.valor, 
-  //       cidade.nome AS cidadeNome, 
-  //       usuario.email AS usuarioEmail,
-  //       imovel.Cidade,
-  //       imovel.Usuario
-    
   
-  // `;
-
-  //   return this.executeSQL(sql); // Executa a consulta SQL utilizando o método executeSQL e retorna o resultado
-  // }
 
 
   readList() {
@@ -194,53 +171,11 @@ return this.executeSQL(sql, [id]); // Executa a consulta SQL utilizando o métod
     return this.executeSQL(sql, id); // Executa a consulta SQL utilizando o método executeSQL e retorna o resultado
   }
 
-  search(parametro) {
-    const sql = `
-      SELECT 
-        imovel.idimovel, 
-        imovel.cepImovel, 
-        imovel.logradouro, 
-        imovel.bairro, 
-        imovel.complemento, 
-        imovel.tipoImovel, 
-        imovel.finalidadeImovel, 
-        imovel.valor, 
-        cidade.nome AS cidadeNome,
-        estado.nome AS estadoNome
-      FROM 
-        imovel
-      JOIN 
-        cidade ON imovel.idCidade = cidade.idCidade
-      JOIN
-        estado ON cidade.idEstado = estado.idEstado
-      WHERE 
-        imovel.idimovel = ? 
-        OR imovel.cepImovel LIKE ? 
-        OR imovel.logradouro LIKE ? 
-        OR imovel.bairro LIKE ? 
-        OR imovel.complemento LIKE ? 
-        OR imovel.tipoImovel LIKE ? 
-        OR imovel.finalidadeImovel LIKE ? 
-        OR imovel.valor LIKE ? 
-        OR cidade.nome LIKE ? 
-        OR estado.nome LIKE ?`;
-
-    const values = [
-      parametro,
-      `%${parametro}%`,
-      `%${parametro}%`,
-      `%${parametro}%`,
-      `%${parametro}%`,
-      `%${parametro}%`,
-      `%${parametro}%`,
-      `%${parametro}%`,
-      `%${parametro}%`,
-      `%${parametro}%`,
-    ];
-
-    return this.executeSQL(sql, values);
-  }
+  
 }
 
 // Exporta uma instância da classe imovelModel para ser utilizada em outros arquivos do projeto
 module.exports = new ImovelModel();
+
+
+

@@ -25,3 +25,10 @@
 .btnPrimary{
     background-color: var(--white-back);
 }
+
+footer {
+    margin-top: 250px; /* Espaçamento acima do footer */
+    padding: 20px;    /* Espaçamento interno (padding) dentro do footer */
+    background-color: #f5f5f5; /* Exemplo de cor de fundo */
+  }
+  

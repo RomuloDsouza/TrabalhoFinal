@@ -43,7 +43,7 @@ function UpdateImovel() {
     valorAluguel: "",
     valorVenda: "",
     descricaoImovel: "",
-    idImovel:""
+    
   });
 
   useEffect(() => {

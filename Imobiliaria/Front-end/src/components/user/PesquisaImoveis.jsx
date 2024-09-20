@@ -89,7 +89,7 @@ const PesquisaImoveis = () => {
             <MenuItem value="1">1</MenuItem>
             <MenuItem value="2">2</MenuItem>
             <MenuItem value="3">3</MenuItem>
-            <MenuItem value="4">4+</MenuItem>
+            <MenuItem value="4">4</MenuItem>
           </TextField>
         </Grid>
         <Grid item xs={12} sm={3}>
@@ -105,6 +105,7 @@ const PesquisaImoveis = () => {
             <MenuItem value="Rio de Janeiro">Rio de Janeiro</MenuItem>
             <MenuItem value="Salvador">Salvador</MenuItem>
             <MenuItem value="Leopoldina">Leopoldina</MenuItem>
+            <MenuItem value="Cataguases">Cataguases</MenuItem>
           </TextField>
         </Grid>
         <Grid item xs={12} sm={3}>
@@ -119,7 +120,6 @@ const PesquisaImoveis = () => {
             <MenuItem value="MG">MG</MenuItem>
             <MenuItem value="SP">SP</MenuItem>
             <MenuItem value="RJ">RJ</MenuItem>
-            <MenuItem value="ES">ES</MenuItem>
           </TextField>
         </Grid>
         <Grid item xs={12} sm={3}>
@@ -133,7 +133,7 @@ const PesquisaImoveis = () => {
             <MenuItem value="">Todos</MenuItem>
             <MenuItem value="Centro">Centro</MenuItem>
             <MenuItem value="Copacabana">Copacabana</MenuItem>
-            <MenuItem value="Ondina">Ondina</MenuItem>
+            <MenuItem value="Cidade Alta">Cidade Alta</MenuItem>
           </TextField>
         </Grid>
         <Grid item xs={12} sm={3}>

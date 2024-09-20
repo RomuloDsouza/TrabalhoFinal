@@ -208,7 +208,7 @@ function CadastroImovel() {
             <Grid item xs={12} sm={6}>
               <FormControl fullWidth>
                 <InputLabel id="finalidadeImovel-label">
-                  finalidadeImovel do Imóvel
+                  FinalidadeImovel do Imóvel
                 </InputLabel>
                 <Select
                   labelId="finalidadeImovel-label"

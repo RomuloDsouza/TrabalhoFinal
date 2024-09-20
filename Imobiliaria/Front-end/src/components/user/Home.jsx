@@ -401,7 +401,7 @@ function Home() {
                       <CardMedia
                         component="img"
                         height="140"
-                        image={imovel.image}
+                        image={"https://images.unsplash.com/photo-1452626212852-811d58933cae?q=80&w=1364&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"}
                         alt={imovel.descricaoImovel}
                       />
                       <CardContent>
@@ -431,8 +431,8 @@ function Home() {
                     >
                       <CardMedia
                         component="img"
-                        sx={{ width: 200, height: 140 }}
-                        image={imoveis[0].image}
+                        sx={{ width: 400, height: 250 }}
+                        image={"https://images.unsplash.com/photo-1452626212852-811d58933cae?q=80&w=1364&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"}
                         alt={imoveis[0].descricaoImovel}
                       />
                       <Box sx={{ flex: 1, p: 2 }}>
@@ -473,8 +473,8 @@ function Home() {
                         >
                           <CardMedia
                             component="img"
-                            height="140"
-                            image={imovel.image}
+                            height="500"
+                            image={"https://images.unsplash.com/photo-1452626212852-811d58933cae?q=80&w=1364&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"}
                             alt={imovel.descricaoImovel}
                           />
                           <CardContent>
@@ -482,7 +482,7 @@ function Home() {
                               {imovel.descricaoImovel}
                             </Typography>
                             <Typography variant="body2" color="text.secondary">
-                              R$ {imovel.valorVenda}
+                               {<span>Venda </span>}  R$ {imovel.valorVenda}
                             </Typography>
                           </CardContent>
                           <CardActions>
@@ -511,8 +511,8 @@ function Home() {
                         >
                           <CardMedia
                             component="img"
-                            height="140"
-                            image={imovel.image}
+                            height="500"
+                            image={"https://images.unsplash.com/photo-1452626212852-811d58933cae?q=80&w=1364&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"}
                             alt={imovel.descricaoImovel}
                           />
                           <CardContent>
@@ -520,7 +520,7 @@ function Home() {
                               {imovel.descricaoImovel}
                             </Typography>
                             <Typography variant="body2" color="text.secondary">
-                              R$ {imovel.valorAluguel}
+                            {<span>Aluguel </span>} R$ {imovel.valorAluguel}
                             </Typography>
                           </CardContent>
                           <CardActions>
